@@ -1,4 +1,4 @@
-const BASE_URL = 'https://api.andrey.students.nomoredomains.monster';
+const BASE_URL = 'http://api.andrey.students.nomoredomains.monster';
 const checkResponse = (res) => {
     if (res.ok) {
         return res.json()

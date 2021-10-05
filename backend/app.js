@@ -22,13 +22,13 @@ const metod = (value) => {
   }
   throw new Error('Неправильный формат ссылки');
 };
+app.use(cors());
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 mongoose.connect('mongodb://localhost:27017/mestodb');
 app.use(requestLogger);
-
-app.use(cors());
 
 app.get('/crash-test', () => {
   setTimeout(() => {
