@@ -6,6 +6,7 @@ function MyProfile(props) {
     const history = useHistory();
     function onSignOut() {
         localStorage.removeItem('jwt');
+        props.handleOnSignOut();
         history.push('/sign-in');
     }
     return (

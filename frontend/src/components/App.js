@@ -66,6 +66,9 @@ function App() {
                 setInfoTooltip(true)
             })
     }
+    function handleOnSignOut() {
+        setCurrentUser({ name: '', about: '', avatar: '', _id: '' })
+    }
     const history = useHistory();
 
     React.useEffect(() => {
@@ -151,7 +154,7 @@ function App() {
     function handleCardLike(card) {
         const jwt = localStorage.getItem('jwt')
         // Снова проверяем, есть ли уже лайк на этой карточке
-        const isLiked = card.likes.some(i => i._id === currentUser._id);
+        const isLiked = card.likes.some(i => i === currentUser._id);
 
         // Отправляем запрос в API и получаем обновлённые данные карточки
         api.changeLikeCardStatus(card._id, !isLiked, jwt)
@@ -193,6 +196,7 @@ function App() {
                         path="/"
                         loggedIn={loggedIn}
                         component={MyProfile}
+                        handleOnSignOut ={handleOnSignOut}
                         email={email}
                         isEditAvatarPopupOpen={isEditAvatarPopupOpen}
                         cards={cards} onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick}
