@@ -44,6 +44,14 @@ function App() {
                 if (data && data.token) {
                     setEmail(email);
                     setLoggedIn(true);
+                    getContent(data.token)
+                    .then((res) => {
+                        if (res) {
+                            setEmail(res.email)
+                            setCurrentUser({ name: res.name, about: res.about, avatar: res.avatar, _id: res._id });
+                        }
+                    })
+                    .catch((err) => console.log(err));
                     history.push('./')
                 } else {
                     console.log('Неверный логин или пароль')
@@ -67,7 +75,7 @@ function App() {
             })
     }
     function handleOnSignOut() {
-        setCurrentUser({ name: '', about: '', avatar: '', _id: '' })
+        setCurrentUser({ name: '', about: '', avatar: '', _id: '' });
     }
     const history = useHistory();
 
@@ -80,8 +88,7 @@ function App() {
             getContent(jwt)
                 .then((res) => {
                     if (res) {
-                        console.log(res.email)
-                        setEmail(res.data.email)
+                        setEmail(res.email)
                         setCurrentUser({ name: res.name, about: res.about, avatar: res.avatar, _id: res._id });
                         setLoggedIn(true);
                         history.push("/")
@@ -197,8 +204,8 @@ function App() {
                         path="/"
                         loggedIn={loggedIn}
                         component={MyProfile}
-                        handleOnSignOut ={handleOnSignOut}
                         email={email}
+                        handleOnSignOut={handleOnSignOut}
                         isEditAvatarPopupOpen={isEditAvatarPopupOpen}
                         cards={cards} onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick}
                         onCardLike={handleCardLike} onDeleteClick={handleConfirmDeleteClick}
