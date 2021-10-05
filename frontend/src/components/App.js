@@ -44,7 +44,6 @@ function App() {
                 if (data && data.token) {
                     setEmail(email);
                     setLoggedIn(true);
-                    setCurrentUser({ name: data.name, about: data.about, avatar: data.avatar, _id: data._id });
                     history.push('./')
                 } else {
                     console.log('Неверный логин или пароль')
@@ -81,8 +80,9 @@ function App() {
             getContent(jwt)
                 .then((res) => {
                     if (res) {
-                        console.log(res.data.email)
+                        console.log(res.email)
                         setEmail(res.data.email)
+                        setCurrentUser({ name: res.name, about: res.about, avatar: res.avatar, _id: res._id });
                         setLoggedIn(true);
                         history.push("/")
                     }
