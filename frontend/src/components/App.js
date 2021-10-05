@@ -44,6 +44,7 @@ function App() {
                 if (data && data.token) {
                     setEmail(email);
                     setLoggedIn(true);
+                    setCurrentUser({ name: data.name, about: data.about, avatar: data.avatar, _id: data._id });
                     history.push('./')
                 } else {
                     console.log('Неверный логин или пароль')
@@ -73,7 +74,7 @@ function App() {
 
     React.useEffect(() => {
         tokenCheck();
-    }, [currentUser._id])
+    }, [])
     function tokenCheck() {
         const jwt = localStorage.getItem('jwt')
         if (jwt) {
