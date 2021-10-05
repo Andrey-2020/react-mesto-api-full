@@ -1,0 +1,14 @@
+.form__button_inactive {
+  background: #ededed;
+  pointer-events: none;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  color: #000000;
+}
+.form__button_inactive:focus {
+  outline: none;
+}

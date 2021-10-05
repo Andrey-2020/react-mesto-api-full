@@ -1,0 +1,14 @@
+.header__sign {
+    border: 0;
+    padding: 0;
+    background-color: #000000;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 22px;
+    /* identical to box height, or 122% */
+    cursor: pointer;
+    text-align: right;
+    color: #FFFFFF;
+}

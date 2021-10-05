@@ -1,0 +1,8 @@
+.header__button-signOut {
+    cursor: pointer;
+    background: #000000;
+    padding: 0;
+    border: 0;
+    color: #A9A9A9;
+    margin-left: 24px;
+}
