@@ -31,7 +31,6 @@ function App() {
     const [cards, setCards] = React.useState([]);
     const [result, setResult] = React.useState(false);
     const [isInfoTooltip, setInfoTooltip] = React.useState(false);
-
     function handleLogin(email, password) {
         authorize(email, password)
             .then((data) => {
@@ -118,7 +117,8 @@ function App() {
         setSelectedCard({ name: '', link: '' });
     }
     function handleUpdateUser(userData) {
-        api.updateUserTask(userData, '')
+        const jwt = localStorage.getItem('jwt')
+        api.updateUserTask(userData, '', jwt)
             .then(() => {
                 setCurrentUser({ name: userData.name, about: userData.about, avatar: currentUser.avatar, _id: currentUser._id })
                 closeAllPopups();
@@ -127,7 +127,8 @@ function App() {
 
     }
     function handleUpdateAvatar(avatarData) {
-        api.updateUserTask(avatarData, 'avatar')
+        const jwt = localStorage.getItem('jwt')
+        api.updateUserTask(avatarData, 'avatar', jwt)
             .then(() => {
                 setCurrentUser({ name: currentUser.name, about: currentUser.about, avatar: avatarData.avatar, _id: currentUser._id });
                 closeAllPopups();
@@ -136,7 +137,8 @@ function App() {
     }
 
     React.useEffect(() => {
-        Promise.all([api.getUserTasks(), api.getCardTasks()])
+        const jwt = localStorage.getItem('jwt')
+        Promise.all([api.getUserTasks(jwt), api.getCardTasks(jwt)])
             .then(([userInform, cards]) => {
                 setCurrentUser(userInform);
                 setCards(cards);
@@ -147,18 +149,20 @@ function App() {
     }, [])
 
     function handleCardLike(card) {
+        const jwt = localStorage.getItem('jwt')
         // Снова проверяем, есть ли уже лайк на этой карточке
         const isLiked = card.likes.some(i => i._id === currentUser._id);
 
         // Отправляем запрос в API и получаем обновлённые данные карточки
-        api.changeLikeCardStatus(card._id, !isLiked)
+        api.changeLikeCardStatus(card._id, !isLiked, jwt)
             .then((newCard) => {
                 setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
             })
             .catch((err) => console.log(err));
     }
     function handleAddCard(сardData) {
-        api.createCardTask(сardData)
+        const jwt = localStorage.getItem('jwt')
+        api.createCardTask(сardData, jwt)
             .then((newCard) => {
                 setCards([newCard, ...cards]);
                 closeAllPopups();
@@ -166,7 +170,8 @@ function App() {
             .catch(err => console.log('Ошибка. Запрос не выполнен: ', err))
     }
     function handleCardDelete() {
-        api.deleteTask(idDeleteCard)
+        const jwt = localStorage.getItem('jwt')
+        api.deleteTask(idDeleteCard, jwt)
             .then(() => {
                 setCards(cards.filter((card) => { return card._id !== idDeleteCard }));
                 closeAllPopups();

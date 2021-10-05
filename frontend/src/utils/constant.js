@@ -1,9 +1,5 @@
 export const options = {
     url: 'http://api.andrey.students.nomoredomains.monster',
-    headers: {
-        authorization: 'c4582077-8562-4c7d-9d43-345a93912f9e',
-        'Content-Type': 'application/json'
-    },
     cardUrl: 'cards',
     userUrl: 'users/me'
 }
