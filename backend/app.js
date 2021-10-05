@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const validator = require('validator');
+const cors = require('cors');
 const { celebrate, Joi, errors } = require('celebrate');
 const NotFoundError = require('./errors/not-found-err');
 const auth = require('./middlewares/auth');
@@ -21,11 +22,17 @@ const metod = (value) => {
   }
   throw new Error('Неправильный формат ссылки');
 };
+const corsOptions = {
+  origin: 'http://andrey.students.nomoredomains.monster',
+  optionsSuccessStatus: 200,
+};
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 mongoose.connect('mongodb://localhost:27017/mestodb');
 app.use(requestLogger);
+
+app.use(cors(corsOptions));
 
 app.get('/crash-test', () => {
   setTimeout(() => {
