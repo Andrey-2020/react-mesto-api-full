@@ -7,7 +7,7 @@ class Api {
     }
     _headers(jwt) {
         return {
-            'authorization': jwt,
+            'authorization': 'Bearer ' + jwt,
             'Content-Type': 'application/json',
         }
     };
