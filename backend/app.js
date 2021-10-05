@@ -24,7 +24,6 @@ const metod = (value) => {
 };
 const corsOptions = {
   origin: 'http://andrey.students.nomoredomains.monster',
-  optionsSuccessStatus: 200,
 };
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
