@@ -1,4 +1,4 @@
-const BASE_URL = 'https://auth.nomoreparties.co';
+const BASE_URL = 'https://api.andrey.students.nomoredomains.monster';
 const checkResponse = (res) => {
     if (res.ok) {
         return res.json()
