@@ -58,13 +58,13 @@ class Api {
 
     changeLikeCardStatus(cardId, isLiked, jwt) {
         if (isLiked) {
-            return fetch(`${this.url}/${this._cardUrl}/likes/${cardId}`, {
+            return fetch(`${this.url}/${this._cardUrl}/${cardId}/likes`, {
                 method: 'PUT',
                 headers: this._headers(jwt),
             })
                 .then(this._checkResponse)
         } else {
-            return fetch(`${this.url}/${this._cardUrl}/likes/${cardId}`, {
+            return fetch(`${this.url}/${this._cardUrl}/${cardId}/likes`, {
                 method: 'DELETE',
                 headers: this._headers(jwt),
             })

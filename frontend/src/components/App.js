@@ -70,7 +70,7 @@ function App() {
 
     React.useEffect(() => {
         tokenCheck();
-    }, [])
+    }, [currentUser._id])
     function tokenCheck() {
         const jwt = localStorage.getItem('jwt')
         if (jwt) {
